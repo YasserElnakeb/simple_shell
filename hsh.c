@@ -15,10 +15,7 @@ while (1)
 	_puts("$ ");
 	r = getline(&lptr, &n, stdin);
 	if (r == -1)
-	{
-		_putchar('\n');
 		return (-1);
-	}
 	args = pars(lptr, r);
 	exe(args);
 	free(lptr);
