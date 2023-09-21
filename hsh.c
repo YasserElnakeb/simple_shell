@@ -12,7 +12,8 @@ int r = 0;
 
 while (1)
 {
-	_puts("$ ");
+	if (isatty(STDIN_FILENO))
+		_puts("$ ");
 	r = getline(&lptr, &n, stdin);
 	if (r == -1)
 		return (-1);
