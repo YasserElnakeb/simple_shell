@@ -62,7 +62,7 @@ char *_strcpy(char *d, char *s)
 }
 /**
  *_puts - prints a string
- *@str: the string
+ *@s: the string
  *
  * Return: void
  */
