@@ -16,12 +16,14 @@ while (1)
 		_puts("$ ");
 	r = getline(&lptr, &n, stdin);
 	if (r == -1)
-		return (-1);
+	{
+		break;
+	}
 	args = pars(lptr, r);
 	exe(args);
-	free(lptr);
-	free(args);
 }
+free(lptr);
+free(args);
 return (0);
 }
 /**
@@ -69,13 +71,30 @@ for (i = 0; token != NULL; i++)
  */
 void exe(char **args)
 {
-char *c1;
+pid_t pid, wpid;
+int status;
+char *c1, *c2;
 
-if (args)
+pid = fork();
+if (pid == 0)
 {
-	c1 = args[0];
+	if (args)
+	{
+		c1 = args[0];
+		c2 = _path(c1);
 
-if (execve(c1, args, NULL) == -1)
+		if (execve(c2, args, NULL) == -1)
+			perror("Error:");
+	}
+} else if (pid < 0)
+{
 	perror("Error:");
 }
+else
+{
+	do {
+		wpid = waitpid(pid, &status, WUNTRACED);
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+}
+wpid = wpid + (1 - 1);
 }

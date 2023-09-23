@@ -11,7 +11,7 @@ char *p, *pc, *pt, *fp;
 int clen, dlen;
 struct stat buffer;
 
-p = getenv("PATH");
+p = _getenv("PATH");
 if (p)
 {
 	pc = _strdup(p);
@@ -44,4 +44,19 @@ if (p)
 	return (NULL);
 }
 	return (NULL);
+}
+/**
+ * _getenv - get the path
+ * @n: name of exe
+ * Return: path
+ */
+char *_getenv(char *n)
+{
+size_t len = _strlen(n);
+char **env;
+
+for (env = environ; *env != NULL; ++env)
+	if ((_strncmp(n, *env, len) == 0) && ((*env)[len] == '='))
+		return (&(*env)[len + 1]);
+return (NULL);
 }

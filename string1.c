@@ -37,8 +37,6 @@ char *_strcat(char *d, char *s)
 	return (f);
 }
 
-#include "shell.h"
-
 /**
  * _strcpy - copies a string
  * @d: the destination
